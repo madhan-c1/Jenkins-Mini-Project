@@ -11,13 +11,13 @@ pipeline {
         //         git url: 'https://github.com/your-username/your-repo.git'
         //     }
         // }
-
-        stage('Build in Docker') {
+        stage('Build') {
             steps {
-                    sh 'ls -ltr'
-                    // build the project and create a JAR file
-                    sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
-                  }
+                echo 'Building the application...'
+                // Example Node.js build
+                sh 'npm install'
+                sh 'npm run build'
+            }
         }
 
         stage('Docker Build') {
