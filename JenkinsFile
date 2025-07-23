@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = "your-image-name:latest"
+    }
+
+    stages {
+        // stage('Checkout') {  
+        //     steps {
+        //         git url: 'https://github.com/your-username/your-repo.git'
+        //     }
+        // }
+
+        stage('Build') {
+            steps {
+                echo 'Building the application...'
+                // Example Node.js build
+                sh 'npm install'
+                sh 'npm run build'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                echo 'Building Docker image...'
+                sh 'docker build -t $DOCKER_IMAGE .'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                sh 'npm test'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application...'
+                // Optional: Push to Docker Hub / Deploy to Kubernetes
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Cleaning up...'
+        }
+    }
+}

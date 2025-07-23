@@ -1,8 +1,20 @@
-# Dockerfile
-FROM node:18-alpine
+# Use Node.js base image
+FROM node:18
+
+# Set working directory inside the container
 WORKDIR /app
+
+# Copy package files first (better for caching)
 COPY package*.json ./
+
+# Install dependencies
 RUN npm install
+
+# Copy the rest of the application
 COPY . .
+
+# Expose the port your app runs on (if you're using port 3000, adjust if needed)
 EXPOSE 3000
+
+# Command to run the app
 CMD ["npm", "start"]
