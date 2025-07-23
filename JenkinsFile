@@ -19,9 +19,7 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'rm -rf node_modules && rm -rf /root/.npm'
-                sh 'npm cache clean --force'
-                sh 'npm install --unsafe-perm'
+                sh 'npm install'
             }
         }
 
