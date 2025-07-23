@@ -14,13 +14,10 @@ pipeline {
 
         stage('Build in Docker') {
             steps {
-                script {
-                    docker.image(DOCKER_IMAGE).inside {
-                        sh 'npm install'
-                        sh 'npm run build'
-                    }
-                }
-            }
+                    sh 'ls -ltr'
+                    // build the project and create a JAR file
+                    sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
+                  }
         }
 
         stage('Docker Build') {
