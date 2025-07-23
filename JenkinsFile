@@ -12,12 +12,14 @@ pipeline {
         //     }
         // }
 
-        stage('Build') {
+        stage('Build in Docker') {
             steps {
-                echo 'Building the application...'
-                // Example Node.js build
-                sh 'npm install'
-                sh 'npm run build'
+                script {
+                    docker.image(DOCKER_IMAGE).inside {
+                        sh 'npm install'
+                        sh 'npm run build'
+                    }
+                }
             }
         }
 
