@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "your-image-name:latest"
+    DOCKER_IMAGE = "madhanc14/my-app:latest"
     }
 
     stages {
